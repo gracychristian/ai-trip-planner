@@ -1,8 +1,8 @@
 
 const Dashboard = () => {
     return <>
-        <div>
-            Dashboard
+        <div className="pt-[100px]">
+            Dashboard Coming Soon
         </div>
     </>;
 };
