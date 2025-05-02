@@ -67,7 +67,7 @@ const Dashboard = () => {
                   )}
                 </h1>
                 <Button
-                  className="bg-[#174891] text-white font-bold w-[120px] py-2 px-4 rounded-full cursor-pointer group"
+                  className="bg-[#174891] text-white font-bold w-[120px] mt-20 py-2 px-4 rounded-full cursor-pointer group"
                   variant="contained"
                   onClick={() => navigate("./chat.ai")}
                   endIcon={
@@ -95,7 +95,7 @@ const Dashboard = () => {
                 itinerary with Grava. Organize your trip with the AI planner.
             </p>
             <button
-              className="bg-[#174891] text-white px-4 py-2 rounded-md font-semibold hover:bg-[#174891] transition cursor-pointer"
+              className="bg-[#0097a0] text-white px-4 py-2 rounded-md font-semibold hover:bg-[#0097a0] transition cursor-pointer"
               onClick={() => navigate("./chat.ai")}
             >
               Try Here
@@ -117,7 +117,7 @@ const Dashboard = () => {
           Use AI to plan a trip to a traveller-loved spot
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-10 place-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-10 place-items-center mb-10">
           <div className="relative max-w-[280px]">
             <img
               className="rounded-lg shadow-lg object-cover w-full h-[280px] transition duration-300 ease-in-out hover:scale-110"
@@ -166,7 +166,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-      <Footer></Footer>
     </>
   );
 };

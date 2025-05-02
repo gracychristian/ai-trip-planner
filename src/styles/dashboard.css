@@ -45,7 +45,6 @@ body {
     text-transform: uppercase;
     position: relative;
     height: 100vh;
-    padding-top: 80px;
     overflow-y: auto;
   }
   
