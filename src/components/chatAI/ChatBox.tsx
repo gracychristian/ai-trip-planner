@@ -1,10 +1,10 @@
 import { Box, List, ListItem, ListItemText, Paper, Typography } from "@mui/material";
+import ReactMarkdown from 'react-markdown';
 
 const ChatBox = ({ messages, errorMessage }: any) => {
     return (
         <Box
             sx={{
-                flex: 1,
                 padding: 2,
                 overflowY: 'auto',
                 height: 'calc(100vh - 140px)',
@@ -22,7 +22,7 @@ const ChatBox = ({ messages, errorMessage }: any) => {
                                 maxWidth: '70%',
                             }}
                         >
-                            <ListItemText primary={msg.content} />
+                            <ReactMarkdown>{msg.content}</ReactMarkdown>
                         </Paper>
                     </ListItem>
                 ))}

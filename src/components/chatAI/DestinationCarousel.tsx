@@ -46,7 +46,7 @@ const DestinationCarousel = () => {
                         />
                     ))}
                 </div> */}
-                <img style={{height: "100%", objectFit: "fill"}} src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e" alt="nature" />
+                <img style={{height: "100%", objectFit: "fill", width: "100%"}} src="https://cdn.pixabay.com/photo/2016/03/01/13/38/sailing-boats-1230404_1280.jpg" alt="nature" />
             </div>
         </Box>
     );

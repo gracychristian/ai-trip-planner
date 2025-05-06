@@ -104,9 +104,9 @@ const ChatComponent = () => {
 
   return (
     <Grid container sx={{ height: "100%" }}>
-      <Box sx={{ display: "flex", height: "100%", width: "100%" }}>
+      <Box sx={{ display: "flex", height: "100%", width: "100%"}}>
         {/* <ConversationList /> */}
-        <Grid size={{ sm: 6 }}>
+        <Grid size={{ sm: 6 }} sx={{ height: "100%",overflow: "hidden"}}>
           <DestinationCarousel />
         </Grid>
         <Grid size={{ sm: 6 }} sx={{ display: "flex", flexDirection: "column", height: "100%" }}>

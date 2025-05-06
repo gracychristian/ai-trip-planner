@@ -49,10 +49,10 @@ export const themeLight = createTheme({
     mode: 'light',
 
     primary: {
-      main: '#174891'
+      main: '#0097a0'
     },
     secondary: {
-      main: '#698095'
+      main: '#ffffff'
     },
     error: {
       main: '#CB4335'
@@ -184,10 +184,10 @@ export const themeDark = createTheme({
     mode: 'dark',
 
     primary: {
-      main: '#174891'
+      main: '#0097a0'
     },
     secondary: {
-      main: '#D2D2D2'
+      main: '#212121'
     },
     error: {
       main: '#CB4335'
