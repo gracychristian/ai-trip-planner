@@ -13,7 +13,7 @@ const App = () => {
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<MainLayout />}>
-              <Route index element={<Dashboard />} /> {/* acts as default for "/" */}
+              <Route index element={<Dashboard />} />
               <Route path="chat.ai" element={<Chat />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Route>

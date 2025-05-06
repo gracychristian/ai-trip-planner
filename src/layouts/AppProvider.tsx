@@ -49,7 +49,7 @@ export const themeLight = createTheme({
     mode: 'light',
 
     primary: {
-      main: '#698095'
+      main: '#0097a0'
     },
     secondary: {
       main: '#ffffff'
@@ -184,10 +184,10 @@ export const themeDark = createTheme({
     mode: 'dark',
 
     primary: {
-      main: '#008099'
+      main: '#0097a0'
     },
     secondary: {
-      main: '#D2D2D2'
+      main: '#212121'
     },
     error: {
       main: '#CB4335'
@@ -282,8 +282,9 @@ const ThemeLight = responsiveFontSizes(themeLight);
 
 export const AppProvider = ({ children }: AppProviderProps) => {
   const isDarkTheme = useAppSelector((state) => {
-    console.log("state, ",state)
-    return state.themeMode.isDarkTheme});
+    console.log("state, ", state)
+    return state.themeMode.isDarkTheme
+  });
   return (
     <ThemeProvider theme={isDarkTheme ? ThemeDark : ThemeLight}>
       <CssBaseline />
