@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { useState } from "react";
 import '../../styles/Carousel.scss'
-import ImageTransition from "../common/ImageTransition";
+import chatImage from "../../assets/images/decoded_image.webp";
 
 const DestinationCarousel = () => {
     const [stateIndex, setStateIndex] = useState<number>();
@@ -33,7 +33,7 @@ const DestinationCarousel = () => {
 
     return (
         <Box>
-            <div className="slider-controller-container">
+            <div className="slider-controller-container h-[100%]">
                 {/* <ImageTransition slideIndex={stateIndex} images={images} /> */}
                 {/* <TextTransition textIndex={this.state.index} /> */}
                 {/* <div className="selectors">
@@ -46,7 +46,7 @@ const DestinationCarousel = () => {
                         />
                     ))}
                 </div> */}
-                <img style={{height: "100%", objectFit: "fill", width: "100%"}} src="https://cdn.pixabay.com/photo/2016/03/01/13/38/sailing-boats-1230404_1280.jpg" alt="nature" />
+                <img style={{minHeight: "800px", objectFit: "cover", minWidth: "500px",}} src={chatImage} alt="nature" />
             </div>
         </Box>
     );

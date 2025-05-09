@@ -190,8 +190,14 @@ export const Header = () => {
       <Dialog
         open={openDialog}
         onClose={handleCloseDialog}
-        maxWidth="md"
-        fullWidth
+        maxWidth={dialogType === "profile" ? "xs" : "md"}
+        fullWidth={dialogType !== "profile"}
+        sx={{
+          "& .MuiDialog-paper": {
+            width: dialogType === "profile" ? "400px" : "100%",
+            maxWidth: dialogType === "profile" ? "400px" : "800px",
+          },
+        }}
       >
         <div className="flex justify-between px-5 pt-5">
           <DialogTitle className="!p-0 place-content-center">
