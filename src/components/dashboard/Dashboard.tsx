@@ -49,14 +49,14 @@ const Dashboard = () => {
               }`}
             >
               <div>
-                <h1 className="word mb-4 image-text">
+                <h1 className="word mb-6 image-text">
                   {concept.content.map((val, i) =>
                     concept.type === "char-div" ? (
                       <div key={i} className="char" data-content={val}>
                         {val}
                       </div>
                     ) : concept.type === "char" ? (
-                      <span key={i} className="char">
+                      <span key={i} className="char mb-6">
                         {val}
                       </span>
                     ) : (
@@ -67,47 +67,50 @@ const Dashboard = () => {
                   )}
                 </h1>
                 <Button
-                  className="bg-[#174891] text-white font-bold w-[120px] mt-20 py-2 px-4 rounded-full cursor-pointer group"
-                  variant="contained"
-                  onClick={() => navigate("./chat.ai")}
-                  endIcon={
-                    <NearMeIcon
-                      style={{ transform: "rotate(50deg)" }}
-                      className="transform transition-transform duration-300 group-hover:rotate-[-20deg]"
-                    />
-                  }
-                >
-                  Send
-                </Button>
+                className="bg-[#174891] text-white font-bold w-[150px] h-[40px] mt-20 py-2 px-4 rounded-[50px] cursor-pointer group transition-all duration-300 shadow-md hover:shadow-xl hover:bg-[#1e5cb3]"
+                variant="contained"
+                onClick={() => navigate("./chat.ai")}
+                endIcon={
+                  <NearMeIcon
+                    style={{ transform: "rotate(50deg)" }}
+                    className="transform transition-transform duration-300 group-hover:rotate-[-20deg]"
+                  />
+                }
+              >
+                Send
+              </Button>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-center gap-10 p-8 my-10">
-          <div className="max-w-md">
-            <h2 className="text-xl font-bold mb-4">
+        <div className="flex flex-col md:flex-row items-cente justify-between px-8 py-12 mx-7 rounded-xl my-10 bg-[#eaffff]">
+          <div className="max-w-xl place-content-center">
+            <h1 className="text-2xl font-bold mb-4">
               Craft tailored itineraries with AI
-            </h2>
+            </h1>
             <p className="text-gray-700 mb-4">
                 Going on a quick business trip or dreaming up the perfect gap
                 year abroad? No need to spend hours crafting your ideal
-                itinerary with Grava. Organize your trip with the AI planner.
+                itinerary with Travly. Organize your trip with the AI planner.
+                Going on a quick business trip or dreaming up the perfect gap
+                year abroad? No need to spend hours crafting your ideal
+                itinerary with Travly. Organize your trip with the AI planner.
             </p>
             <button
-              className="bg-[#0097a0] text-white px-4 py-2 rounded-md font-semibold hover:bg-[#0097a0] transition cursor-pointer"
+              className="transition-transform duration-300 hover:scale-105 bg-[#0097a0] text-white px-4 py-2 font-semibold text-base cursor-pointer w-[200px] h-[45px] rounded-4xl"
               onClick={() => navigate("./chat.ai")}
             >
-              Try Here
+              Create a new trip
             </button>
           </div>
 
           <div className="bg-blue-200 p-4 rounded-md shadow-lg">
-            <div className="overflow-hidden">
+            <div className="overflow-hidden max-w-xl">
               <img
                 src="https://cms.inspirato.com/ImageGen.ashx?image=%2Fmedia%2F5682412%2FLondon_Dest_125855814.jpg&width=1081.5"
                 alt="Venice"
-                className="rounded-md w-[400px] h-auto object-cover transition duration-300 ease-in-out hover:scale-110"
+                className="rounded-md w-auto h-auto object-cover transition duration-300 ease-in-out hover:scale-110"
               />
             </div>
           </div>
