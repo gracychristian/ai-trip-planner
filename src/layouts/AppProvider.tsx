@@ -282,7 +282,7 @@ const ThemeLight = responsiveFontSizes(themeLight);
 
 export const AppProvider = ({ children }: AppProviderProps) => {
   const isDarkTheme = useAppSelector((state) => {
-    console.log("state, ", state)
+    console.log("state theme, ", state.themeMode)
     return state.themeMode.isDarkTheme
   });
   return (

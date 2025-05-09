@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Box,
@@ -31,22 +31,23 @@ import TravlyLogo from "../../assets/images/Travly.png";
 import TravlyDarkLogo from "../../assets/images/Travly-dark.png";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { toggleTheme } from "../../redux/slices/themeSlice";
-import GoogleIcon from "@mui/icons-material/Google";
-import AppleIcon from "@mui/icons-material/Apple";
 import { useNavigate } from "react-router-dom";
+import { googleLogout, useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+import { toggleTheme } from "../../redux/slices/themeSlice";
+import Authorization from "../auth/auth";
 
 export const Header = () => {
   const navigate = useNavigate();
-  const options = ["Profile", "Sign up", "Sign in"];
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.up("sm"));
-
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [mobileOpen, setMobileOpen] = React.useState(true);
-  const [openDialog, setOpenDialog] = React.useState(false);
-  const [dialogType, setDialogType] = React.useState<
-    "profile" | "signup" | "signin" | null
+  
+  const [options, setOptions] = useState(["Profile", "Sign in"]);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [mobileOpen, setMobileOpen] = useState(true);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [dialogType, setDialogType] = useState<
+    "profile" | "signin" | null
   >(null);
 
   const handleOpenDialog = () => {
@@ -70,9 +71,12 @@ export const Header = () => {
 
   const dispatch = useAppDispatch();
   const isDarkTheme = useAppSelector((state) => state.themeMode.isDarkTheme);
-
+  const userData = localStorage.getItem("authInfo")
+  useEffect(() => {
+    console.log("userData", userData)
+  }, [userData])
   const handleThemeChange = () => {
-    // dispatch(toggleTheme());
+    dispatch(toggleTheme());
   };
 
   const drawerContent = (
@@ -154,9 +158,8 @@ export const Header = () => {
                     handleClose();
                     setDialogType(
                       option.toLowerCase().replace(" ", "") as
-                        | "signup"
-                        | "signin"
-                        | "profile"
+                      | "signin"
+                      | "profile"
                     );
                     handleOpenDialog();
                   }}
@@ -192,7 +195,6 @@ export const Header = () => {
       >
         <div className="flex justify-between px-5 pt-5">
           <DialogTitle className="!p-0 place-content-center">
-            {dialogType === "signup" && "Sign Up"}
             {dialogType === "signin" && "Sign In"}
             {dialogType === "profile" && "Profile"}
           </DialogTitle>
@@ -204,7 +206,6 @@ export const Header = () => {
         <DialogContent>
           {dialogType === "profile" && (
             <>
-              <p>This is the profile dialog content.</p>
               <div className="flex mt-3 font-bold items-center">
                 <PermIdentityIcon className="text-[#174891] mr-5" />
                 <h4>Guest</h4>
@@ -222,92 +223,8 @@ export const Header = () => {
             </>
           )}
 
-          {(dialogType === "signup" || dialogType === "signin") && (
-            <div className="flex flex-col md:flex-row gap-6 mt-2">
-              <div className="flex flex-col gap-4 min-w-[300px] md:w-1/2">
-                {dialogType === "signup" && (
-                  <>
-                    <TextField label="Full Name" variant="outlined" fullWidth />
-                    <TextField
-                      label="Email"
-                      type="email"
-                      variant="outlined"
-                      fullWidth
-                      required
-                    />
-                    <TextField
-                      label="Password"
-                      type="password"
-                      variant="outlined"
-                      fullWidth
-                    />
-                    <TextField
-                      label="Confirm Password"
-                      type="password"
-                      variant="outlined"
-                      fullWidth
-                    />
-                  </>
-                )}
-
-                {dialogType === "signin" && (
-                  <>
-                    <TextField
-                      label="Email"
-                      type="email"
-                      variant="outlined"
-                      fullWidth
-                    />
-                    <TextField
-                      label="Password"
-                      type="password"
-                      variant="outlined"
-                      fullWidth
-                    />
-                  </>
-                )}
-
-                <Button variant="contained" color="primary" type="submit">
-                  {dialogType === "signup" ? "Sign Up" : "Sign In"}
-                </Button>
-
-                <div className="text-sm text-center mt-2">
-                  {dialogType === "signup" ? (
-                    <>
-                      Already have an account?{" "}
-                      <span
-                        className="text-blue-600 cursor-pointer"
-                        onClick={() => setDialogType("signin")}
-                      >
-                        Sign In
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      New to Travly?{" "}
-                      <span
-                        className="text-blue-600 cursor-pointer"
-                        onClick={() => setDialogType("signup")}
-                      >
-                        Sign Up
-                      </span>
-                    </>
-                  )}
-                </div>
-              </div>
-
-              <div className="relative md:w-1/2 hidden md:block max-h-[450px]">
-                <img
-                  src="https://img.freepik.com/free-photo/maldives-island_1203-3746.jpg?t=st=1746100542~exp=1746104142~hmac=c0a1a8fce4d0919df590dd8d3b3a7d9541332c2cd95037e6aebab166ebb25f83&w=740"
-                  alt="Sign up illustration"
-                  className="w-full h-full object-cover rounded-r-lg"
-                />
-                <div className="absolute top-8 left-8 bg-white p-4 rounded-md shadow-md max-w-[240px]">
-                  Here's the tea, sign up for a free account and, voilà, we'll
-                  continue chatting.
-                </div>
-              </div>
-            </div>
+          {(dialogType === "signin") && (
+            <Authorization  />
           )}
         </DialogContent>
       </Dialog>
