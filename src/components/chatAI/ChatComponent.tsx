@@ -29,6 +29,8 @@ const ChatComponent = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const chatEndRef = useRef<HTMLDivElement | null>(null);
+  const [displayedAssistantMessage, setDisplayedAssistantMessage] = useState("");
+
 
   const scrollToBottom = () => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -36,7 +38,7 @@ const ChatComponent = () => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, loading]);
+  }, [messages, loading,displayedAssistantMessage]);
 
   const estimateTokens = (text: string) => {
     return Math.ceil(text.split(/\s+/).length * 1.5);
@@ -88,7 +90,29 @@ const ChatComponent = () => {
       );
 
       const reply = res.data.choices[0].message.content;
-      setMessages([...updatedMessages, { role: "assistant", content: reply }]);
+      let currentText = "";
+      setDisplayedAssistantMessage("");
+      const typingSpeed = 30;
+      
+      for (let i = 0; i <= reply.length; i++) {
+        setTimeout(() => {
+          currentText = reply.slice(0, i);
+          setDisplayedAssistantMessage(currentText);
+      
+          scrollToBottom();
+      
+          if (i === reply.length) {
+            setTimeout(() => {
+              setMessages([...updatedMessages, { role: "assistant", content: reply }]);
+              setDisplayedAssistantMessage("");
+          
+              setTimeout(() => {
+                scrollToBottom();
+              }, 100); 
+            }, 20);
+          }
+        }, i * typingSpeed);
+      }
       setErrorMessage("");
     } catch (err) {
       console.error("Error from OpenAI:", err);
@@ -106,11 +130,11 @@ const ChatComponent = () => {
     <Grid container sx={{ height: "100%" }}>
       <Box sx={{ display: "flex", height: "100%", width: "100%"}}>
         {/* <ConversationList /> */}
-        <Grid size={{ sm: 6 }} sx={{ height: "100%",overflow: "hidden"}}>
+        <Grid size={{ sm: 5 }} sx={{ height: "100%",overflow: "hidden"}}>
           <DestinationCarousel />
         </Grid>
-        <Grid size={{ sm: 6 }} sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
-          <ChatBox messages={messages} errorMessage={errorMessage} />
+        <Grid size={{ sm: 7 }} sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
+        <ChatBox messages={messages} errorMessage={errorMessage} typingMessage={displayedAssistantMessage} />
           <ChatInput handleKeyDown={handleKeyDown} setInputValue={setInput} inputValue={input} />
           <div ref={chatEndRef} />
         </Grid>
